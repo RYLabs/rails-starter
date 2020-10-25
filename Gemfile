@@ -62,3 +62,9 @@ gem 'devise'
 
 # Authorization
 gem 'pundit'
+
+# Background Workers
+gem 'sidekiq'
+
+# Configuration
+gem 'anyway_config'
