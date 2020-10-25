@@ -68,3 +68,6 @@ gem 'sidekiq'
 
 # Configuration
 gem 'anyway_config'
+
+# GraphQL
+gem 'graphql'
