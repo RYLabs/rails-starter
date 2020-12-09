@@ -4,7 +4,7 @@
 # ApplicationController.
 class ApplicationController < ActionController::Base
   include Pundit
-  include Response
+  include CommonResponses
 
   protect_from_forgery with: :null_session
   respond_to :html, :json
