@@ -35,6 +35,8 @@ group :development, :test do
   # Use RSpec instead of the default test framework
   gem 'rspec-rails', '~> 4.0.1'
   gem 'factory_bot_rails'
+
+  gem 'faker'
 end
 
 group :development do
@@ -71,3 +73,9 @@ gem 'anyway_config'
 
 # GraphQL
 gem 'graphql'
+
+# Multitenancy
+gem 'acts_as_tenant'
+
+# Slugs
+gem 'friendly_id'
