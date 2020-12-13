@@ -4,14 +4,11 @@ module Auth
   ##
   # Used for Web authentication.
   class SessionsController < Devise::SessionsController
-    skip_before_action :authenticate_user!, only: %I[new create]
+    respond_to :html
+    protect_from_forgery with: :exception
 
+    before_action :authenticate_user!, only: %I[update destroy]
     before_action :configure_sign_in_params, only: [:create]
-
-    def after_sign_in_path_for(resource)
-      # super(resource)
-      new_subscription_path(resource)
-    end
 
     protected
 

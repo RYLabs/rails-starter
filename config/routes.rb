@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  devise_for :users, skip: [:passwords], controllers: {
-    sessions: 'auth/sessions',
-    registrations: 'auth/registrations'
+  devise_for :users, path: 'auth', path_names: {
+    sign_in: 'login', 
+    sign_out: 'logout',
+    registration: 'register',
   }
 
   namespace :api, defaults: { format: :json } do

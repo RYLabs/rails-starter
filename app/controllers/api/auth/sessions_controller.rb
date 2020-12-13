@@ -5,8 +5,11 @@ module Api
     ##
     # API Auth Sessions for login logout
     class SessionsController < Devise::SessionsController
+      respond_to :json
+      protect_from_forgery with: :null_session
+
       before_action :configure_permitted_parameters
-      skip_before_action :authenticate_user!, only: [:create]
+      before_action :authenticate_user!, only: [:logout]
 
       def create
         resource = User.find_for_database_authentication(email: params[:user][:email])
@@ -34,7 +37,7 @@ module Api
 
       def invalid_login_attempt
         warden.custom_failure!
-        json_response({ err: { message: 'Error invalid credentials' } }, status = :unauthorized)
+        json_response({ err: { message: 'Error invalid credentials' } }, :unauthorized)
       end
     end
   end
