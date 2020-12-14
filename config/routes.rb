@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     devise_scope :user do
-      post    'login',   to: 'auth/sessions#create'
+      post    'login',    to: 'auth/sessions#create'
       delete  'logout',   to: 'auth/sessions#logout'
       post    'register', to: 'auth/registrations#create'
     end
