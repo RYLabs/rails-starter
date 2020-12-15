@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def find_current_tenant
-    set_current_tenant(current_user.tenant) if current_user
+    set_current_tenant(current_user.account) if current_user
     set_current_tenant(nil) unless current_user
   end
 end
