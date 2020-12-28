@@ -9,7 +9,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
-devise_jwt_secret_key = DeviseJwtConfig.new
+devise_jwt_config = DeviseJwtConfig.new
 
 Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
@@ -313,7 +313,7 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   config.jwt do |jwt|
-    jwt.secret = devise_jwt_secret_key.secret_key
+    jwt.secret = devise_jwt_config.secret_key
     jwt.dispatch_requests = [
       ['POST', %r{^/api/login$}],
       ['POST', %r{^/api/register$}]
