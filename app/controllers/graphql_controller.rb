@@ -1,5 +1,6 @@
 class GraphqlController < ApplicationController
   protect_from_forgery with: :null_session
+  before_action :authenticate_user!, only: %i[execute]
 
   def execute
     variables = prepare_variables(params[:variables])
