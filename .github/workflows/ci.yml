@@ -27,11 +27,11 @@ jobs:
         ports: ['6379:6379']
         options: --entrypoint redis-server
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v2
       - name: Setup ruby
         uses: actions/setup-ruby@v1
         with:
-          # Uses ruby version from .ruby-version
+          ruby-version: 2.7.2
           # Runs bundle install caching the gems
           bundler-cache: true
       # Install npm packages
@@ -45,5 +45,6 @@ jobs:
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
+          bundle install
           bundle exec rails db:prepare
           rspec
