@@ -19,25 +19,24 @@ jobs:
         immage: redis
         ports: ['6379:6379']
         options: --entrypoint redis-server
-
-  steps:
-    - uses: actions/checkout@main
-    - name: Setup ruby
-      uses: actions/setup-ruby@v1
-      with:
-        # Uses ruby version from .ruby-version
-        # Runs bundle install caching the gems
-        bundler-cache: true
-    # Install npm packages
-    - uses: borales/actions-yarn@v2.1.4
-      with: 
-        cmd: install
-    - name: Run rspec tests
-      env:
-        DATABASE_URL: postgres://postgres:@localhost:5432/myapp_test
-        REDIS_URL: redis://localhost:6379/0
-        RAILS_ENV: test
-        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      run: |
-        bundle exec rails db:prepare
-        rspec spec
+    steps:
+      - uses: actions/checkout@main
+      - name: Setup ruby
+        uses: actions/setup-ruby@v1
+          with:
+            # Uses ruby version from .ruby-version
+            # Runs bundle install caching the gems
+            bundler-cache: true
+      # Install npm packages
+      - uses: borales/actions-yarn@v2.1.4
+        with: 
+          cmd: install
+      - name: Run rspec tests
+        env:
+          DATABASE_URL: postgres://postgres:@localhost:5432/myapp_test
+          REDIS_URL: redis://localhost:6379/0
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          bundle exec rails db:prepare
+          rspec
