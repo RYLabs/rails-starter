@@ -1,0 +1,4 @@
+{
+  "ruby.rubocop.executePath": "/home/devops/.rvm/rubies/ruby-2.7.2/bin/",
+  "solargraph.commandPath": "/home/devops/.rvm/gems/ruby-2.7.2/bin/solargraph"
+}

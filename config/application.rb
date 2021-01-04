@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -7,6 +9,8 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Myapp
+  ##
+  # Application
   class Application < Rails::Application
     # Configure the path for configuration classes that should be used before initialization
     # NOTE: path should be relative to the project root (Rails.root)

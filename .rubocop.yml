@@ -1,0 +1,6 @@
+AllCops:
+  Excludes:
+    - '**/db/**/*'
+    - '**/node_modules/**/*'
+  Rails:
+    Enabled: true

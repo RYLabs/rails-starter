@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 redis_config = RedisConfig.new
 
 Sidekiq.configure_server do |config|

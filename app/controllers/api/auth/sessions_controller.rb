@@ -24,9 +24,7 @@ module Api
       end
 
       def logout
-        if current_user.reset_authentication_token!
-          json_response({ message: 'User logged out.' })
-        end
+        json_response({ message: 'User logged out.' }) if current_user.reset_authentication_token!
       end
 
       protected

@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+##
+# IndividualAccount
 class IndividualAccount < BaseAccount
   has_one :user
   before_validation :set_random_name
