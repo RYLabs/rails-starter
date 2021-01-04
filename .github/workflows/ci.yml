@@ -35,7 +35,7 @@ jobs:
           # Runs bundle install caching the gems
           bundler-cache: true
       # Install npm packages
-      - uses: borales/actions-yarn@v2.1.4
+      - uses: borales/actions-yarn@v2.3.0
         with: 
           cmd: install
       - name: Run rspec tests
