@@ -10,7 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  rspec-tests:
+    name: RSpec
     runs-on: ubuntu-latest
     services:
       # Postgresql DB.
@@ -47,5 +48,19 @@ jobs:
           RAILS_MASTER_KEY: 8c70c10c2f1c8a1c28dca16715b54dfc
         run: |
           bundle install
-          bundle exec rails db:prepare
-          bundle exec rspec spec
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+          bundle exec rails db:prepare RAILS_ENV=test
+          bundle exec rake
+  rubocop:
+    name: rubocop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby
+        with:
+          bundler-cache: true
+      - name: install Rubocop
+        run: gem install rubocop
+      - name: check code
+        run: rubocop
