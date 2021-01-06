@@ -1,5 +1,5 @@
 # Github action workflow name.
-name: CI
+name: RSpecTests
 # Actions workflow listens for
 on:
   push:
@@ -52,15 +52,3 @@ jobs:
           bundle exec rails db:migrate RAILS_ENV=test
           bundle exec rails db:prepare RAILS_ENV=test
           bundle exec rake
-  rubocop:
-    name: rubocop
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: install Rubocop
-        run: gem install rubocop
-      - name: check code
-        run: rubocop

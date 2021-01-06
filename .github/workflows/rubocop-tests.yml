@@ -1,0 +1,23 @@
+# Github action workflow name.
+name: RubocopTests
+# Actions workflow listens for
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs: 
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: install Rubocop
+        run: gem install rubocop
+      - name: check code
+        run: rubocop
