@@ -4,18 +4,20 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it 'has individual account when creation' do
-    user = described_class.create!(email: 'test@example.com', password: 'Password123!')
-    expect(user).to be_persisted
-    expect(user.individual_account).to_not be_nil
+    aggregate_failures('Verify user persited with individual_account') do
+      user = described_class.create!(email: 'test@example.com', password: 'Password123!')
+      expect(user).to be_persisted
+      expect(user.individual_account).not_to be_nil
+    end
   end
 
   context 'with existing user' do
-    subject { FactoryBot.create(:user) }
+    subject(:user) { FactoryBot.create(:user) }
 
     it 'has many accounts' do
       account = FactoryBot.create(:account)
-      subject.account_users.create!(account: account)
-      expect(subject.accounts).to include(account)
+      user.account_users.create!(account: account)
+      expect(user.accounts).to include(account)
     end
   end
 end

@@ -36,6 +36,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.1'
   # Code formatting (linter)
   gem 'rubocop', require: false
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do

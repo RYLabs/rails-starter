@@ -8,8 +8,10 @@ module Api
       respond_to :json
       protect_from_forgery with: :null_session
 
-      before_action :configure_permitted_parameters
-      before_action :authenticate_user!, only: [:logout]
+      before_action :configure_permitted_parameters, only: [:create]
+      # rubocop:disable Rails/LexicallyScopedActionFilter
+      before_action :authenticate_user!, only: %i[logout update]
+      # rubocop:enable Rails/LexicallyScopedActionFilter
 
       def create
         resource = User.find_for_database_authentication(email: params[:user][:email])

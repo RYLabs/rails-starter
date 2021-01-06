@@ -8,8 +8,11 @@ module Api
       respond_to :json
       protect_from_forgery with: :null_session
 
-      before_action :configure_permitted_parameters
+      # rubocop:disable Rails/LexicallyScopedActionFilter
+      before_action :configure_permitted_parameters, only: [:create]
+      before_action :configure_account_update_params, only: [:update]
       before_action :authenticate_user!, only: %i[update destroy]
+      # rubocop:enable Rails/LexicallyScopedActionFilter
 
       protected
 
