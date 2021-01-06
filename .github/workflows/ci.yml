@@ -48,4 +48,4 @@ jobs:
         run: |
           bundle install
           bundle exec rails db:prepare
-          rspec
+          bundle exec rspec spec
