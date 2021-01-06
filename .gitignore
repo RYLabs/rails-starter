@@ -43,4 +43,13 @@ yarn-debug.log*
 /config/*.local.yml
 /config/credentials/local.*
 
-.vscode/settings.json
+# Ignore vscode files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
