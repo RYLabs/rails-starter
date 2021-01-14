@@ -1,0 +1,33 @@
+<%= tag.meta name: "stripe-key", content: Pay::Stripe.public_key %>
+
+<h1>Subscribe!</h1>
+<div class="flash">
+    <%- if !notice.nil? -%>
+    <p class="notice"><%= notice %></p>
+    <%- end -%> 
+    <%- if !alert.nil? -%>
+    <p class="alert"><%= alert %></p>
+    <%- end -%>     
+</div>
+<%= form_with url: subscription_path, local: true, id: "payment-form" do |form| %>
+  <div class="form-group">
+    <label for="card-element">Credit or debit card</label>
+    <div id="card-element" class="form-control">
+    </div>
+
+    <div id="card-errors" role="alert"></div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name_on_card %>
+    <%= form.text_field :name_on_card, id: "name_on_card", placeholder: "Full name", class: "form-control" %>
+  </div>
+
+ <div class="form-group">
+    <%= form.hidden_field :plan, value: "monthly" %>
+    <%= form.submit "Subscribed", class: "btn btn-primary" %>
+  </div> 
+
+<% end %>
+
+<script src="https://js.stripe.com/v3/"></script>

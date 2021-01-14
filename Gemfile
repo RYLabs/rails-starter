@@ -63,11 +63,17 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'devise-jwt'
 
+# Subscription management
+gem 'pay'
+
 # Authorization
 gem 'pundit'
 
 # Background Workers
 gem 'sidekiq'
+# Payments
+gem 'stripe', '~> 5.29'
+gem 'stripe_event', '~> 2.3', '>= 2.3.1'
 
 # Configuration
 gem 'anyway_config'

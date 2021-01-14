@@ -14,4 +14,6 @@ Rails.application.routes.draw do
       post    'register', to: 'auth/registrations#create'
     end
   end
+
+  resource :subscription
 end

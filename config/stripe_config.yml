@@ -1,0 +1,13 @@
+default: &default
+#  private_key: ""
+#  public_key: ""
+#  signing_key: ""
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
