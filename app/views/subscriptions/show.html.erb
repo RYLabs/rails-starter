@@ -1,3 +1,8 @@
 <h1>Subscription details.</h1>
 <br>
-<p><%= @current_user.individual_account.subscribed? %></p>
+<h2>Subscription plan</h2>
+<% if @current_user.individual_account.subscribed? %>
+  <p><%= @current_user.individual_account.plan %></p>
+<% else %>
+  <%= link_to(subscription_path) %>
+<% end %>

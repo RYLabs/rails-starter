@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-##
-# SubscriptionsController
-# Handles Account subscription
 class SubscriptionsController < ApplicationController
   include StripeSubscription
   
@@ -24,7 +21,7 @@ class SubscriptionsController < ApplicationController
   def create
     return redirect_to subscription_path, notice: 'You are already subscribed.' if current_user.individual_account.subscribed?
     puts "WHAT IS THE PLAN :: ", subscription_params[:plan]
-    create_subscription(current_user, subscription_params[:card_token])
+    create_subscription(current_user, subscription_params[:card_token], subscription_params[:plan])
     flash[:notice] = 'Thank you, You are now subscribed!'
     redirect_to subscription_path
   rescue Pay::ActionRequired => e
