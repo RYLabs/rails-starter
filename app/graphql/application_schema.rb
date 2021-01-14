@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-##
-# ApplicationSchema
 class ApplicationSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
