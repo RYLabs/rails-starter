@@ -14,6 +14,7 @@ module StripeSubscription
 
     current_user.individual_account.processor = 'stripe'
     current_user.save!
+    raise current_user
     current_user.individual_account.customer
   end
 end
