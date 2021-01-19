@@ -88,3 +88,8 @@ gem 'acts_as_tenant'
 
 # Slugs
 gem 'friendly_id'
+
+# Subscriptions and payments
+gem 'pay'
+gem 'stripe'
+gem 'stripe_event'

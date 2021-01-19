@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class BaseAccount < ApplicationRecord
+  include Pay::Billable
   self.table_name = 'accounts'
 
   extend FriendlyId
