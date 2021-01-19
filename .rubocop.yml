@@ -1,0 +1,25 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+Documentation:
+  Enabled: false
+
+AllCops:
+  Excludes:
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'bin/*'
+    - 'app/controllers/graphql_controller.rb'
+    - 'config/**/*'
+    - 'Gemfile*'
+    - 'Rakefile'
+    - 'config.ru'
+    - 'spec/factories/**/*'
+  Rails:
+    Enabled: true
+  Metrics/LineLength:
+    Max: 120
+  Metrics/MethodLength:
+    Max: 25

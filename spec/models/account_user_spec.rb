@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe AccountUser, type: :model do
@@ -5,11 +7,13 @@ RSpec.describe AccountUser, type: :model do
     subject { FactoryBot.create(:account_user) }
 
     it 'can determine if it has a role' do
-      expect(subject).to_not be_has_role 'admin'
+      aggregate_failures('Verify role is not admin') do
+        expect(user).not_to be_role 'admin'
 
-      subject.roles << :admin
+        user.roles << :admin
 
-      expect(subject).to_not be_has_role :admin
+        expect(user).not_to be_role :admin
+      end
     end
   end
 end

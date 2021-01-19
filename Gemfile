@@ -39,6 +39,12 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   # fake data generation
   gem 'faker'
+
+  # code linter
+  gem 'rubocop', require: false
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do

@@ -2,14 +2,14 @@
 
 module Api
   module Auth
-    ##
-    # JSON API new user registrations
     class RegistrationsController < Devise::RegistrationsController
       respond_to :json
       protect_from_forgery with: :null_session
 
       before_action :configure_permitted_parameters
+      # rubocop:disable Rails/LexicallyScopedActionFilter
       before_action :authenticate_user!, only: %i[update destroy]
+      # rubocop:enable Rails/LexicallyScopedActionFilter
 
       protected
 
