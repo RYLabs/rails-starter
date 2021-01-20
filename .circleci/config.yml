@@ -8,19 +8,23 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:2.7-node
+      - image: cimg/ruby:2.7.2-node
     steps:
       - checkout
       - ruby/install-deps
       # Store bundle cache
+      # missing from orb/cimg
+      - run:
+          name: install gem rspec_junit_formatter
+          command: gem install rspec_junit_formatter
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
   test:
     parallelism: 3
     docker:
-      - image: cimg/ruby:2.7-node
-      - image: circleci/postgres:9.5-alpine
+      - image: cimg/ruby:2.7.2-node
+      - image: circleci/postgres:11.2-alpine
         environment:
           POSTGRES_USER: myapp
           POSTGRES_DB: myapp_test
