@@ -37,7 +37,7 @@ jobs:
           command: bundle exec rake db:setup
       - run:
           name: RSpec tests
-          command: rspec
+          command: bundle exec rspec
       - run:
           name: Rubocop linter/formatting
-          command: rubocop
+          command: bundle exec rubocop
