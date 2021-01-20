@@ -19,16 +19,20 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
       - run:
           name: Install bundler
           command: gem install bundler:2.1.4
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - run:
           name: Install gems
-          command: bundle config set path 'vendor/bundle' && bundle install
-      # - ruby/bundle-install # (does not work gives error about --flag being depreciated)
+          command: bundle config set path 'vendor/bundle' && bundle install --jobs=4
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+            key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: Yarn setup
           command: yarn install
@@ -38,6 +42,6 @@ jobs:
       - run:
           name: RSpec tests
           command: bundle exec rspec
-      - run:
-          name: Rubocop linter/formatting
-          command: bundle exec rubocop
+      # - run:
+      #     name: Rubocop linter/formatting
+      #     command: bundle exec rubocop
