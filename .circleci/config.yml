@@ -7,8 +7,9 @@ jobs:
     docker:
       - image: circleci/ruby:2.7.2-node
         environment:
-          PGHOST: localhost
-          PGUSER: myapp
+          DATABASE_HOST: localhost
+          DATABASE_USER: myapp
+          DATABASE_PASSWORD: ""
           RAILS_ENV: test
       - image: circleci/postgres:11.1
         environment:
@@ -33,7 +34,7 @@ jobs:
           command: yarn install
       - run:
           name: Database setup
-          command: rails db:setup --environment test
+          command: bundle exec rake db:setup
       - run:
           name: RSpec tests
           command: rspec
