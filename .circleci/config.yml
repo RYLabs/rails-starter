@@ -13,10 +13,6 @@ jobs:
       - checkout
       - ruby/install-deps
       # Store bundle cache
-      # missing from orb/cimg
-      - run:
-          name: install gem rspec_junit_formatter
-          command: gem install rspec_junit_formatter
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
@@ -39,6 +35,10 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      # missing from orb/cimg
+      - run:
+          name: install gem rspec_junit_formatter
+          command: gem install rspec_junit_formatter
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
