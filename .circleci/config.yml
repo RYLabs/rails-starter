@@ -35,10 +35,6 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      # missing from orb/cimg
-      - run:
-          name: install gem rspec_junit_formatter
-          command: gem install rspec_junit_formatter
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
@@ -50,7 +46,8 @@ jobs:
           command: bundle exec rails db:schema:load --trace
       # Run rspec in parallel
       - ruby/rspec-test
-      - ruby/rubocop-check
+      # uncomment once rubocop setup branch is merged
+      # - ruby/rubocop-check
 
 workflows:
   version: 2
