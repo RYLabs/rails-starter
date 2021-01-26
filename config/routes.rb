@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'subscriptions#show'
+
   devise_for :users, path: 'auth', path_names: {
     sign_in: 'login', 
     sign_out: 'logout',
@@ -16,4 +18,5 @@ Rails.application.routes.draw do
   end
 
   resource :subscription
+  resource :card
 end

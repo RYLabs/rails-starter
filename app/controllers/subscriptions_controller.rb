@@ -7,39 +7,48 @@ class SubscriptionsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :subscription_params, only: [:create]
+  before_action :user_subscribed?, only: [:new, :create, :destroy]
 
   def show
+    @user = current_user
+    @subscription_decorator = SubscriptionDecorator.new(current_user, view_context)
+    authorize :subscription, :show?
   end
 
   def new
-    if current_user.individual_account.subscribed?
-      flash[:notice] = 'You are already subscribed.'
-      redirect_to subscribed_path
-    end
+    authorize :subscription, :new?
   end
 
   def create
-    return redirect_to subscribed_path, notice: 'You are already subscribed.' if current_user.individual_account.subscribed?
+    authorize :subscription, :create?
+    # service used to easily integrate futher payment gateways or expand subscription options 
+    create_monthly_subscription(current_user, subscription_params[:card_token])
 
-    create_subscription(current_user, subscription_params[:card_token])
-    flash[:notice] = 'Thank you, You are now subscribed!'
-    redirect_to subscribed_path
+    redirect_to subscription_path(subscription)
   rescue Pay::ActionRequired => e
     redirect_to pay.payment_path(e.payment.id)
-  rescue Pay::Error, Stripe::InvalidRequestError => e
+  rescue Pay::Error => e
     flash[:alert] = e.message
     render :new
   end
 
   def destroy
+    authorize :subscription, :destroy?
     current_user.individual_account.subscription.cancel
 
-    redirect_to unsubscribed_path, notice: 'Your subscription to Scoutmob has been canceled. Any remaining balance can still be used until its expiry date.'
+    redirect_to subscription_path, notice: 'Your subscription has been canceled. Any remaining balance can still be used until its expiry date.'
   end
 
   private
 
   def subscription_params
     params.permit(:card_token)
+  end
+
+  def user_subscribed?
+    if current_user.individual_account.subscribed?
+      flash[:notice] = 'You are already subscribed.'
+      redirect_to subscription_path
+    end
   end
 end

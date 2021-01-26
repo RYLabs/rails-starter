@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class IndividualAccount < BaseAccount
+  include Pay::Billable
   has_one :user, dependent: :destroy
   before_validation :set_random_name
 
