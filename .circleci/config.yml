@@ -44,10 +44,9 @@ jobs:
       - run:
           name: Database setup
           command: bundle exec rails db:schema:load --trace
-      # Run rspec in parallel
+      # Run in parallel
       - ruby/rspec-test
-      # uncomment once rubocop setup branch is merged
-      # - ruby/rubocop-check
+      - ruby/rubocop-check
 
 workflows:
   version: 2
