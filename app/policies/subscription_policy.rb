@@ -1,5 +1,6 @@
-class SubscriptionPolicy < Struct.new(:user, :subscription)
+# frozen_string_literal: true
 
+SubscriptionPolicy = Struct.new(:user, :subscription) do
   def show?
     user.present?
   end
@@ -9,10 +10,10 @@ class SubscriptionPolicy < Struct.new(:user, :subscription)
   end
 
   def create?
-    user.present? and not user.individual_account.subscribed?
+    user.present? && !user.individual_account.subscribed?
   end
 
   def destroy?
-    user.present? and not user.individual_account.subscribed?
+    user.present? && !user.individual_account.subscribed?
   end
 end

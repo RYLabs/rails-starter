@@ -7,7 +7,9 @@ module StripeSubscription
     current_user.individual_account.processor = 'stripe'
     current_user.individual_account.card_token = card_token
 
-    subscription = current_user.individual_account.subscribe(name: 'individual', plan: 'price_1I99wlIvmPrtU2SFRDGJ1ng3', cancel_at_period_end: true)
+    current_user.individual_account.subscribe(name: 'individual',
+                                              plan: 'price_1I99wlIvmPrtU2SFRDGJ1ng3',
+                                              cancel_at_period_end: true)
   end
 
   private

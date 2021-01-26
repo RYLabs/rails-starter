@@ -4,7 +4,8 @@ class SubscriptionDecorator
   attr_reader :user, :view_context
 
   def initialize(user, view_context)
-    @user, @view_context = user, view_context
+    @user = user
+    @view_context = view_context
   end
 
   def subscription_details
@@ -25,7 +26,7 @@ class SubscriptionDecorator
 
   private
 
-  def ends_at_format format = "%a %d %B %Y"
+  def ends_at_format(format = '%a %d %B %Y')
     @user.individual_account.subscription.ends_at.strftime(format)
   end
 end
