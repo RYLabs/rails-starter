@@ -17,6 +17,7 @@ AllCops:
     - 'Rakefile'
     - 'config.ru'
     - 'spec/factories/**/*'
+    - 'vendor/bundle/**/*'
   Rails:
     Enabled: true
   Layout/LineLength:
