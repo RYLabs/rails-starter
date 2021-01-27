@@ -7,8 +7,10 @@ module Auth
     respond_to :html
     protect_from_forgery with: :exception
 
+    # rubocop:disable Rails/LexicallyScopedActionFilter
     before_action :authenticate_user!, only: %I[update destroy]
     before_action :configure_sign_in_params, only: [:create]
+    # rubocop:enable Rails/LexicallyScopedActionFilter
 
     protected
 

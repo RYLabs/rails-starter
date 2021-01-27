@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class IndividualAccount < BaseAccount
-  has_one :user
+  has_one :user, dependent: :destroy
   before_validation :set_random_name
 
   protected

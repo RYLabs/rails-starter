@@ -2,8 +2,6 @@
 
 module Api
   module Auth
-    ##
-    # API Auth Sessions for login logout
     class SessionsController < Devise::SessionsController
       respond_to :json
       protect_from_forgery with: :null_session
@@ -24,9 +22,7 @@ module Api
       end
 
       def logout
-        if current_user.reset_authentication_token!
-          json_response({ message: 'User logged out.' })
-        end
+        return json_response({ message: 'User logged out.' }) if current_user.reset_authentication_token!
       end
 
       protected
