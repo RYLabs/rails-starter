@@ -35,7 +35,9 @@ group :development, :test do
   # Use RSpec instead of the default test framework
   gem 'rspec-rails', '~> 4.0.1'
   gem 'factory_bot_rails'
-
+  # required for CircleCI to pass
+  gem 'rspec_junit_formatter'
+  # fake data generation
   gem 'faker'
 end
 
