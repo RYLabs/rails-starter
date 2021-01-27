@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BaseAccount < ApplicationRecord
   self.table_name = 'accounts'
 
