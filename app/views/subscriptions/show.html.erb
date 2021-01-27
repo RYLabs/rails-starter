@@ -1,0 +1,28 @@
+<h1>Subscription details</h1>
+
+<% if @current_user.individual_account.subscribed? %>
+  <hr/>
+  <br/>
+  <h1>Manage subscription</h1>
+  <p><%= @subscription_decorator.subscription_details %></p>
+  <p><%= @subscription_decorator.subscription_expires %></p>
+  
+  <%= link_to 'Cancel subscription', subscription_path, method: :delete %>  
+  <br/>
+  <hr/>
+  <br/>
+  <h1>Payment details</h1>
+  <p><%= @subscription_decorator.card_details %></p>
+  <p><%= @subscription_decorator.card_expires %></p>
+  <%= link_to 'Edit card', edit_card_path %>  
+  <br/>
+  <hr/>
+
+<% else %>
+  <p>Not subscribed</p>
+  <%= link_to 'Subscribe', new_subscription_path %>  
+<% end %>
+
+<h6>Actions</h6>
+
+<%= link_to 'Logout', destroy_user_session_path, method: :delete %>
