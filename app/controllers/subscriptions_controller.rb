@@ -25,7 +25,7 @@ class SubscriptionsController < ApplicationController
 
     create_monthly_subscription(current_user, subscription_params[:card_token])
 
-    redirect_to subscription_path(subscription)
+    redirect_to subscription_path
   rescue Pay::ActionRequired => e
     redirect_to pay.payment_path(e.payment.id)
   rescue Pay::Error => e
