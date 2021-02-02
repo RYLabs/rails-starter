@@ -4,15 +4,15 @@ require 'rails_helper'
 
 RSpec.describe AccountUser, type: :model do
   context 'with existing account user' do
-    subject(:user) { FactoryBot.create(:account_user) }
+    subject(:user) { FactoryBot.create(:user) }
 
     it 'can determine if it has a role' do
       aggregate_failures('Verify role is not admin') do
-        expect(user).not_to be_role 'admin'
+        expect(user.account_users.first).not_to be_role 'admin'
 
-        user.roles << :admin
+        user.account_users.first.roles << :admin
 
-        expect(user).not_to be_role :admin
+        expect(user.account_users.first).not_to be_role :admin
       end
     end
   end
