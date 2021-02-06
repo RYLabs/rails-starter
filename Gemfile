@@ -39,7 +39,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   # fake data generation
   gem 'faker'
-  # association/validation testing
+
   gem 'shoulda-matchers', '~> 4.0'
   # code linter
   gem 'rubocop', require: false
