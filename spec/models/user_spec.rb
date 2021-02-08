@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
     aggregate_failures('Verify user persited with individual_account') do
       user = described_class.create!(email: 'test@example.com', password: 'Password123!')
       expect(user).to be_persisted
-      expect(user.accounts.first.account_type).to eq('individual')
+      expect(user.individual_account.account_type).not_to be_nil
     end
   end
 

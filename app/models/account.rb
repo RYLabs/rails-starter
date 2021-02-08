@@ -10,12 +10,11 @@ class Account < ApplicationRecord
   before_validation :set_random_name
 
   friendly_id :name, use: :slugged
-  validates :name, :slug, presence: true
 
   protected
 
   def set_random_name
-    self.name = self.slug = SecureRandom.uuid
+    self.name ||= SecureRandom.uuid
   end
 
   def email
