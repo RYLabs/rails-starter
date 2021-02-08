@@ -93,5 +93,5 @@ gem 'friendly_id'
 # subscriptions
 gem 'pay', '~> 2.0'
 # payment gateways
-gem 'stripe', '< 6.0', '>= 2.8'
+gem 'stripe', '>= 2.8', '< 6.0'
 gem 'stripe_event', '~> 2.3'
