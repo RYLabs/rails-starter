@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
     aggregate_failures('Verify user persited with individual_account') do
       user = described_class.create!(email: 'test@example.com', password: 'Password123!')
       expect(user).to be_persisted
-      expect(user.individual_account).not_to be_nil
+      expect(user.individual_account.account_type).not_to be_nil
     end
   end
 
@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
     subject(:user) { FactoryBot.create(:user) }
 
     it 'has many accounts' do
-      account = FactoryBot.create(:account)
+      account = FactoryBot.create(:account, user_id: user.id)
       user.account_users.create!(account: account)
       expect(user.accounts).to include(account)
     end
