@@ -13,7 +13,7 @@ class SubscriptionDecorator
   end
 
   def subscription_details
-    "#{@user.individual_account.subscription.name } plan."
+    "#{@user.individual_account.subscription.name} plan."
   end
 
   def subscription_expires

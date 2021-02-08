@@ -14,10 +14,8 @@ class SubscriptionsController < ApplicationController
     @subscription_decorator = SubscriptionDecorator.new(current_user, view_context)
   end
 
-  def new
-  end
+  def new; end
 
-  # rubocop:disable Metrics/AbcSize
   def create
     create_monthly_subscription(current_user, subscription_params[:card_token])
 
@@ -28,7 +26,6 @@ class SubscriptionsController < ApplicationController
     flash[:alert] = e.message
     render :new
   end
-  # rubocop:enable Metrics/AbcSize
 
   def destroy
     authorize :subscription, :destroy?
@@ -50,4 +47,4 @@ class SubscriptionsController < ApplicationController
     flash[:notice] = 'You are already subscribed.'
     redirect_to subscription_path
   end
-end 
+end
