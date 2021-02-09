@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/RYLabs/aws-healthcheck
+  revision: 1ca2978472acf67ba11155a452788c92a7c9c81a
+  specs:
+    aws-healthcheck (1.1.1)
+      rails (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -317,6 +324,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_tenant
   anyway_config
+  aws-healthcheck!
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)

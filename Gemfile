@@ -95,3 +95,5 @@ gem 'pay', '~> 2.0'
 # payment gateways
 gem 'stripe', '>= 2.8', '< 6.0'
 gem 'stripe_event', '~> 2.3'
+
+gem 'aws-healthcheck', git: 'https://github.com/RYLabs/aws-healthcheck'
