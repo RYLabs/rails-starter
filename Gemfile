@@ -88,3 +88,5 @@ gem 'acts_as_tenant'
 
 # Slugs
 gem 'friendly_id'
+
+gem 'aws-healthcheck', git: 'https://github.com/RYLabs/aws-healthcheck'
