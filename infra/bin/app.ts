@@ -1,75 +1,134 @@
 #!/usr/bin/env node
 
 import * as cdk from "@aws-cdk/core";
-import { RdsStack, AppInfo } from "@rylabs/ry-cdk-tools/lib/rds";
+import { RdsStack } from "@rylabs/ry-cdk-tools/lib/rds";
 import { InstanceType, InstanceSize, InstanceClass } from "@aws-cdk/aws-ec2";
-import { RailsPipelineStack, RailsStack } from "@rylabs/ry-cdk-tools/lib/rails";
+import {
+  RailsPipelineStack,
+  RailsStack,
+  AppInfo,
+  Conventions,
+} from "@rylabs/ry-cdk-tools/lib/rails";
 
 const env = {
-  account: "Enter Your AWS Account ID",
-  region: "us-east-1",
+  account: "AWS_ACCOUNT_ID",
+  region: "us-east-2",
 };
 
 const appInfo: AppInfo = {
   // Name of the app, in lower title case format. Use for naming AWS resources.
-  name: "enterAppName",
+  name: "app name here",
 
   // Short name of the environment. Use for naming AWS resources.
-  environment: "envShortName",
+  environment: "staging",
 
   // Environment name.
-  orgName: "Enter Your Organization Name",
+  orgName: "Company name",
 
   // Author name.
-  author: "Enter Your Name",
+  author: "Your name here",
 };
 
 // Github repo owner name
-const ownerName = "enter-repo-owner-name";
+const ownerName = "Github repo owner name";
 
 // Github repo name
-const repoName = "enter-repo-name";
+const repoName = "Github repo name";
+
+// Branch this environment deploys from
+const branchName = "develop";
 
 // AWS VPC ID
-const vpcId = "enter-vpc-id";
+const vpcId = "vpc-ID#####";
 
-// Server EC2 Instance type
-const instanceType = InstanceType.of(InstanceClass.T2, InstanceSize.MEDIUM);
+// Ruby stack
+const solutionStackName = "64bit Amazon Linux 2 v3.2.2 running Ruby 2.7";
+
+const dbInstanceIdentifier = "app-staging";
+const dbInstanceEndpointAddress =
+  "AWS_RDS_ENDPOINT.rds.amazonaws.com";
+const dbPort = 5432;
+const dbName = "app_staging";
+const dbSecurityGroup = "sg-########";
+const dbUsername = "appstagingdbuser";
+const dbPassword = {
+  secretId: "appnamestagingdbMasterPasswor-######",
+  jsonField: "password",
+};
 
 const app = new cdk.App();
 const vpc = { vpcId };
+const conventions = new Conventions(appInfo);
 
-// Database with medium T2 instance
-const rds = new RdsStack(app, "rdsProd", {
+/*
+ * Setup VPC instance
+ * 
+ * Two options, manually create VPC instance using the AWS Dashboard
+ * or use the below code to create a VPC with max Availability zone default is set to 2
+ * 
+ * import { VpcStack } from "@rylabs/ry-cdk-tools/lib/stacks";
+ * 
+ * const vpcName = `${conventions.eqn('camel')}Vpc` 
+ * const vpc = new VpcStack(app, vpcName, {} )
+ * 
+ * aditional params
+ * const vpc = new VpcStack(app, vpcName, {maxAzs: 4} )
+ * 
+ * After Vpc has been created obtain the vpcId.
+ * vpc.vpc.vpcId
+ * 
+ */
+
+// TODO: Add tip to use ignoreHealthCheck when setting up for the first time
+
+/*
+ *  Setup an RDS database for use by the Rails application
+ */
+/*
+const instanceClass = InstanceType.of(InstanceClass.T2, InstanceSize.MEDIUM);
+const rds = new RdsStack(app, `${conventions.eqn('camel')}Rds`, {
   env,
   vpc,
   appInfo,
-  instanceType,
+  instanceClass,
 });
+*/
 
 // Rails
-const rails = new RailsStack(app, appInfo.name, {
+const rails = new RailsStack(app, `${conventions.eqn("camel")}`, {
   env,
   appInfo,
   vpc,
+  railsEnvironment: appInfo.environment,
+  solutionStackName,
   databaseAccess: {
-    instance: rds.dbInstance,
-    databaseName: rds.dbInstance.databaseName,
-    securityGroup: rds.securityGroup,
-    username: rds.dbInstance.masterUsername,
-    password: rds.dbInstance.masterPassword,
+    instance: {
+      instanceIdentifier: dbInstanceIdentifier,
+      instanceEndpointAddress: dbInstanceEndpointAddress,
+      port: dbPort,
+      securityGroups: [],
+    },
+    databaseName: dbName,
+    securityGroup: dbSecurityGroup,
+    username: dbUsername,
+    password: dbPassword,
   },
   defaultProcess: {
     healthCheckPath: "/_healthcheck",
   },
+  command: {
+    ignoreHealthCheck: true,
+  },
 });
 
 // Rails Pipeline
-const pipelineName = `${appInfo.name}Pipeline${appInfo.environment.toUpperCase}`;
+const pipelineName = `${conventions.eqn("camel")}Pipeline`;
 const pipeline = new RailsPipelineStack(app, pipelineName, {
   env,
   appInfo,
   environment: rails.ebEnvironment,
   ownerName,
   repoName,
+  branchName,
 });
+pipeline.addDependency(rails);
