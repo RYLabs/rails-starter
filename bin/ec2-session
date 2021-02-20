@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+REGION=us-east-2 
+
+instance_id=$(aws --region $REGION ec2 describe-instances --filters Name=tag:elasticbeanstalk:environment-name,Values=wisat-$1 Name=instance-state-code,Values=16 | jq -r '.Reservations[0].Instances[0].InstanceId')
+
+echo 'Connecting to ${instance_id}...'
+aws --region $REGION ssm start-session --target $instance_id

@@ -8,7 +8,7 @@ services:
       args:
         RUBY_VERSION: '2.7.2'
         PG_MAJOR: '11'
-        NODE_MAJOR: '12'
+        NODE_MAJOR: '14'
         YARN_VERSION: '1.22.5'
         BUNDLER_VERSION: '2.1.4'
     image: ry-rails:1.0.0
