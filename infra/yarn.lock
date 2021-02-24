@@ -717,10 +717,10 @@
   resolved "https://registry.yarnpkg.com/@balena/dockerignore/-/dockerignore-1.0.2.tgz#9ffe4726915251e8eb69f44ef3547e0da2c03e0d"
   integrity sha512-wMue2Sy4GAVTk6Ic4tJVcnfdau+gx2EnG7S+uAEe+TWJFqE4YoWN4/H8MSLj4eYJKxGg26lZwboEniNiNwZQ6Q==
 
-"@rylabs/ry-cdk-tools@^0.0.47":
-  version "0.0.47"
-  resolved "https://registry.yarnpkg.com/@rylabs/ry-cdk-tools/-/ry-cdk-tools-0.0.47.tgz#a466961c70fac60c770b8652c7e1ee35681aaaf1"
-  integrity sha512-0ijT/WqRIzuF6XF3KGs0qHC6TztUkpvsbr56+3cjzXDLYaACI91PP31QrotY0xxtTnPL/XPZWyqnePs1GwTDNw==
+"@rylabs/ry-cdk-tools@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@rylabs/ry-cdk-tools/-/ry-cdk-tools-0.1.3.tgz#d9ed891c8d70a014a4bccd5575e7413a15b87bd3"
+  integrity sha512-otS4kta6pbsl34zia1io6U2b0aZs6AWTLptql/yjykEt+xloLl06lf2ksLRXC8axMEWzD+3e7Sy0oWY23uAzYw==
   dependencies:
     "@types/lodash" "^4.14.150"
     lodash "^4.17.15"

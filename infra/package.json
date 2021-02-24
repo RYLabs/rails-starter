@@ -16,7 +16,7 @@
     "@aws-cdk/aws-elasticbeanstalk": "^1.89.0",
     "@aws-cdk/aws-rds": "^1.89.0",
     "@aws-cdk/aws-secretsmanager": "^1.89.0",
-    "@rylabs/ry-cdk-tools": "^0.0.47",
+    "@rylabs/ry-cdk-tools": "^0.1.3",
     "typescript": "^4.1.3"
   }
 }

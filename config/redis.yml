@@ -6,6 +6,10 @@ test:
   <<: *default
   database: 1
 
+staging:
+  <<: *default
+  database: 0
+
 development:
   <<: *default
   database: 0

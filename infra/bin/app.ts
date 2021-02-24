@@ -44,6 +44,12 @@ const vpcId = "vpc-ID#####";
 // Ruby stack
 const solutionStackName = "64bit Amazon Linux 2 v3.2.2 running Ruby 2.7";
 
+// Instance type for Rails servers
+const railsInstanceType = InstanceType.of(
+  InstanceClass.T3,
+  InstanceSize.MEDIUM
+);
+
 const dbInstanceIdentifier = "app-staging";
 const dbInstanceEndpointAddress =
   "AWS_RDS_ENDPOINT.rds.amazonaws.com";
@@ -101,6 +107,7 @@ const rails = new RailsStack(app, `${conventions.eqn("camel")}`, {
   vpc,
   railsEnvironment: appInfo.environment,
   solutionStackName,
+  ec2InstanceTypes: [railsInstanceType.toString()],
   databaseAccess: {
     instance: {
       instanceIdentifier: dbInstanceIdentifier,

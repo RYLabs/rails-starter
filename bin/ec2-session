@@ -1,9 +1,15 @@
 #!/bin/bash
 set -e
 
-REGION=us-east-2 
+if [ "$#" -ne 1 ]; then
+  echo "Usage: ./bin/ec2-session <environment>"
+  exit 1
+fi
 
-instance_id=$(aws --region $REGION ec2 describe-instances --filters Name=tag:elasticbeanstalk:environment-name,Values=wisat-$1 Name=instance-state-code,Values=16 | jq -r '.Reservations[0].Instances[0].InstanceId')
+env=$1
+region=us-east-2
 
-echo 'Connecting to ${instance_id}...'
-aws --region $REGION ssm start-session --target $instance_id
+instance_id=$(aws --region $region ec2 describe-instances --filters Name=tag:elasticbeanstalk:environment-name,Values=myapp-$env Name=instance-state-code,Values=16 | jq -r '.Reservations[0].Instances[0].InstanceId')
+
+echo "Connecting to ${instance_id}..."
+aws --region $region ssm start-session --target $instance_id
