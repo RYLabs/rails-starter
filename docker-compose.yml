@@ -42,10 +42,8 @@ services:
       - BINDING=0.0.0.0
       - PORT=3000
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - postgres
+      - redis
 
   runner:
     <<: *backend
