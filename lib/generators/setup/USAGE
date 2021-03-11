@@ -1,0 +1,23 @@
+Description:
+    WARNING: This generator will delete any existing credentials. 
+             It is highly recomended that you back up any existing data.
+    Setup new applications using ry-rails-starter. Updates application with new application name.
+    Deletes old rails:credentials along with the master.key to create a new one.
+    Updates host and email for devise mailer_sender.
+
+Example:
+    rails generate setup NewAppName myemail@example.com myhost.com
+
+    The new application name should be provided in Pascal case.
+    e.g. 'NewAppName' not 'new app name' or 'new_app_name'
+
+    This will update files:
+        Module name in config/application.rb
+        Name in package.json
+        Title in app/views/layouts/application.html.erb
+        Channel prefix in config/cable.yml
+        Database names in config/database.yml
+        config.active_job.queue_name_prefix in config/environments/production.rb
+        image name in docker-compose.yml
+        config.mailer_sender in config/initializers/devise.rb
+        config.action_mailer.default_url_options in config/environments/production.rb
