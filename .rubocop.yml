@@ -7,6 +7,7 @@ Documentation:
   Enabled: false
 
 AllCops:
+  TargetRubyVersion: 2.7.2
   Excludes:
     - 'db/**/*'
     - 'node_modules/**/*'
@@ -20,9 +21,24 @@ AllCops:
     - 'vendor/bundle/**/*'
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
-  Rails:
-    Enabled: true
-  Layout/LineLength:
-    Max: 120
-  Metrics/MethodLength:
-    Max: 25
+    - 'Guardfile'
+
+Rails:
+  Enabled: true
+Layout/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 25
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+RSpec/ExampleLength:
+  Max: 10
+Style/StructInheritance:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 22
