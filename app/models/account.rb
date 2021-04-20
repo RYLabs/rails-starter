@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Account < ApplicationRecord
+  include Pay::Billable
   extend FriendlyId
 
   belongs_to :user, class_name: 'User'
@@ -11,13 +12,13 @@ class Account < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
+  def email
+    user.email
+  end
+
   protected
 
   def set_random_name
     self.name ||= SecureRandom.uuid
-  end
-
-  def email
-    user.email
   end
 end
