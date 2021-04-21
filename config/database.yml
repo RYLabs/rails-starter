@@ -21,7 +21,7 @@ test:
 
 staging:
   <<: *default
-  database: wisat_staging
+  database: myapp_staging
 
 production:
   <<: *default

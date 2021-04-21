@@ -92,3 +92,12 @@ gem 'acts_as_tenant'
 gem 'friendly_id'
 
 gem 'aws-healthcheck', git: 'https://github.com/RYLabs/aws-healthcheck'
+
+# Subscriptions and payment gateway. Uncomment gems to add additional 
+# payment gateways and/or functionality
+gem 'pay', '~> 2.0'
+gem 'stripe', '>= 2.8', '< 6.0'
+gem 'stripe_event'
+# gem 'braintree', '< 3.0', '>= 2.92.0'
+# gem 'paddle_pay', '~> 0.1'
+# gem 'receipts', '~> 1.0.0'
