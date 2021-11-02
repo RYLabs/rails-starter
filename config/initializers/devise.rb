@@ -317,11 +317,11 @@ Devise.setup do |config|
   config.jwt do |jwt|
     jwt.secret = app_config.devise_jwt_secret_key
     jwt.dispatch_requests = [
-      ['POST', %r{^/api/login$}],
-      ['POST', %r{^/api/register$}]
+      ['POST', %r{^/auth/login$}],
+      ['POST', %r{^/auth/register$}]
     ]
     jwt.revocation_requests = [
-      ['DELETE', %r{^/api/logout$}]
+      ['DELETE', %r{^/auth/logout$}]
     ]
     jwt.expiration_time = 0
   end
